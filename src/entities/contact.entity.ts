@@ -2,8 +2,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  BeforeInsert,
-  BeforeUpdate,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
@@ -16,13 +14,13 @@ export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 60, unique: true })
+  @Column({ type: 'varchar', length: 60 })
   fullName: string;
 
-  @Column({ type: 'varchar', length: 45, unique: true })
+  @Column({ type: 'varchar', length: 45 })
   email: string;
 
-  @Column({ type: 'varchar', length: 20, unique: true })
+  @Column({ type: 'varchar', length: 20 })
   phoneNumber: string;
 
   @CreateDateColumn({ type: 'date' })
