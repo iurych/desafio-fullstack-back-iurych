@@ -7,14 +7,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
+import { Client } from './client.entity';
 
-import { getRounds, hash } from 'bcryptjs';
-import { Contact } from './contact.entity';
-
-@Entity('clients')
-export class Client {
+@Entity('contacts')
+export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -36,20 +34,6 @@ export class Client {
   @DeleteDateColumn({ type: 'date' })
   deletedAt?: Date | string;
 
-  @Column({ type: 'varchar', length: 120 })
-  password: string;
-
-  @OneToMany(() => Contact, (contact) => contact.client)
-  contacts: Contact[];
-
-  @BeforeInsert()
-  @BeforeUpdate()
-  async hashPassword(): Promise<void> {
-    if (this.password) {
-      const isHashed: number = getRounds(this.password);
-      if (!isHashed) {
-        this.password = await hash(this.password, 10);
-      }
-    }
-  }
+  @ManyToOne(() => Client, (client) => client.contacts)
+  client: Client;
 }

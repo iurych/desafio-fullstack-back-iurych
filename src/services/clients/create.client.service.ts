@@ -1,16 +1,16 @@
 import { AppDataSource } from '../../data-source';
 import { Client } from '../../entities/client.entity';
 import {
+  tClientRepo,
   tClientRequest,
   tClientResponse,
 } from '../../interfaces/client.interface';
-import { Repository } from 'typeorm';
 import { responseClientSchema } from '../../schemas/client.schema';
 
 export const createClientService = async (
   payload: tClientRequest
 ): Promise<tClientResponse> => {
-  const clientRepo: Repository<Client> = AppDataSource.getRepository(Client);
+  const clientRepo: tClientRepo = AppDataSource.getRepository(Client);
 
   const client: Client = clientRepo.create(payload);
 

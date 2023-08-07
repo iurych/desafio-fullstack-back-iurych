@@ -18,6 +18,5 @@ export const responseClientSchema = clientSchema
     password: true,
   });
 
-export const responseAllClients = responseClientSchema.array();
-export const responseClient = responseClientSchema;
+export const responseAllClientsSchema = responseClientSchema.array();
 export const updateClientSchema = clientSchema.partial();

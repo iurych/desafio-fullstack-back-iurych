@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Repository } from 'typeorm';
 import { Client } from '../entities/client.entity';
 import { AppDataSource } from '../data-source';
-import { AppErorr } from '../errors';
+import { AppError } from '../errors';
 
 export const verifyClientByIdMiddleware = async (
   req: Request,
@@ -15,7 +15,7 @@ export const verifyClientByIdMiddleware = async (
     id: req.params.id,
   });
 
-  if (!client) throw new AppErorr('client not found', 404);
+  if (!client) throw new AppError('client not found', 404);
 
   res.locals.client = client;
 

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Repository } from 'typeorm';
 import { Client } from '../entities/client.entity';
 import { AppDataSource } from '../data-source';
-import { AppErorr } from '../errors';
+import { AppError } from '../errors';
 
 export const ensureUniqueDataMiddleware = async (
   req: Request,
@@ -17,7 +17,7 @@ export const ensureUniqueDataMiddleware = async (
       where: { fullName: fullName },
     });
 
-    if (exist) throw new AppErorr('This name already exist', 409);
+    if (exist) throw new AppError('This name already exist', 409);
   }
 
   if (email) {
@@ -25,7 +25,7 @@ export const ensureUniqueDataMiddleware = async (
       where: { email: email },
     });
 
-    if (exist) throw new AppErorr('Email already exist', 409);
+    if (exist) throw new AppError('Email already exist', 409);
   }
 
   if (phoneNumber) {
@@ -34,7 +34,7 @@ export const ensureUniqueDataMiddleware = async (
     });
 
     if (exist)
-      throw new AppErorr('This Phone Number has already been registered', 409);
+      throw new AppError('This Phone Number has already been registered', 409);
   }
 
   return next();
